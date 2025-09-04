@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fleet Resource Optimization with AI Agents</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="header-left">
+            <h1 class="app-title">
+                <i class="fas fa-truck"></i>
+                Fleet Resource Optimization with AI Agents
+            </h1>
+            <div class="status-indicator">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="simulationStatus">Stopped</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="current-time" id="currentTime"></div>
+            <div class="simulation-speed">Speed: <span id="speedDisplay">1.0x</span></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Left Panel: Control Center -->
+        <aside class="left-panel">
+            <div class="panel-section">
+                <h3><i class="fas fa-gamepad"></i> Control Center</h3>
+                <div class="control-buttons">
+                    <button class="btn btn--primary" id="playBtn">
+                        <i class="fas fa-play"></i> Play
+                    </button>
+                    <button class="btn btn--secondary" id="pauseBtn">
+                        <i class="fas fa-pause"></i> Pause
+                    </button>
+                    <button class="btn btn--outline" id="restartBtn">
+                        <i class="fas fa-restart"></i> Restart
+                    </button>
+                </div>
+                
+                <div class="control-sliders">
+                    <div class="slider-group">
+                        <label for="fleetSize">Fleet Size: <span id="fleetSizeValue">25</span></label>
+                        <input type="range" id="fleetSize" min="10" max="100" value="25" class="form-control">
+                    </div>
+                    <div class="slider-group">
+                        <label for="simSpeed">Speed: <span id="simSpeedValue">1.0x</span></label>
+                        <input type="range" id="simSpeed" min="0.5" max="5" step="0.5" value="1" class="form-control">
+                    </div>
+                    <div class="slider-group">
+                        <label for="updateInterval">Update Interval: <span id="updateIntervalValue">3s</span></label>
+                        <input type="range" id="updateInterval" min="1" max="10" value="3" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3><i class="fas fa-cloud-sun"></i> Current Conditions</h3>
+                <div class="weather-info">
+                    <div class="weather-main">
+                        <span class="temperature" id="temperature">32°C</span>
+                        <span class="condition" id="weatherCondition">Partly Cloudy</span>
+                    </div>
+                    <div class="weather-details">
+                        <div><i class="fas fa-tint"></i> <span id="humidity">78%</span></div>
+                        <div><i class="fas fa-wind"></i> <span id="windSpeed">12 km/h</span></div>
+                    </div>
+                </div>
+                <div class="traffic-info">
+                    <div class="traffic-level">
+                        <span>Traffic Level: </span>
+                        <span class="status status--warning" id="trafficLevel">Medium</span>
+                    </div>
+                    <div class="peak-hours">
+                        <i class="fas fa-clock"></i>
+                        <span id="peakHours">Evening Rush</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3><i class="fas fa-robot"></i> AI Agent Panel</h3>
+                <div class="agent-status">
+                    <div class="agent-indicator">
+                        <span class="status-dot active"></span>
+                        <span>MCP Agent Active</span>
+                    </div>
+                    <div class="performance-score">
+                        Performance: <span class="score" id="performanceScore">92%</span>
+                    </div>
+                </div>
+                <div class="decision-log">
+                    <h4>Recent Decisions</h4>
+                    <div class="log-entries" id="decisionLog">
+                        <div class="log-entry">Reallocated 3 vehicles to T.Nagar (high demand)</div>
+                        <div class="log-entry">Weather optimal - increased fleet coverage</div>
+                        <div class="log-entry">Traffic congestion detected - rerouting FL003</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Center Panel: Interactive Map -->
+        <section class="center-panel">
+            <div class="map-container">
+                <div class="map-controls">
+                    <button class="map-btn" id="toggleDemand" title="Toggle Demand Zones">
+                        <i class="fas fa-fire"></i>
+                    </button>
+                    <button class="map-btn" id="toggleTraffic" title="Toggle Traffic">
+                        <i class="fas fa-road"></i>
+                    </button>
+                    <button class="map-btn" id="centerMap" title="Center Map">
+                        <i class="fas fa-crosshairs"></i>
+                    </button>
+                </div>
+                <div id="map"></div>
+                <div class="map-legend">
+                    <div class="legend-item">
+                        <span class="legend-color available"></span>
+                        <span>Available</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color occupied"></span>
+                        <span>Occupied</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color enroute"></span>
+                        <span>En Route</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color idle"></span>
+                        <span>Idle</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Panel: Metrics Dashboard -->
+        <aside class="right-panel">
+            <div class="panel-section">
+                <h3><i class="fas fa-chart-line"></i> Key Metrics</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value" id="fleetUtilization">78%</div>
+                        <div class="metric-label">Fleet Utilization</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="avgResponseTime">4.2min</div>
+                        <div class="metric-label">Avg Response Time</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="customerSatisfaction">87%</div>
+                        <div class="metric-label">Customer Satisfaction</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="fuelEfficiency">12.5km/L</div>
+                        <div class="metric-label">Fuel Efficiency</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="revenuePerHour">₹850</div>
+                        <div class="metric-label">Revenue/Hour</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3><i class="fas fa-chart-bar"></i> Performance Charts</h3>
+                <div class="chart-container" style="height: 200px; position: relative;">
+                    <canvas id="utilizationChart"></canvas>
+                </div>
+                <div class="chart-container" style="height: 150px; position: relative; margin-top: 16px;">
+                    <canvas id="demandChart"></canvas>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3><i class="fas fa-list"></i> Active Requests</h3>
+                <div class="request-list" id="activeRequests">
+                    <div class="request-item">
+                        <div class="request-location">T.Nagar → Airport</div>
+                        <div class="request-time">2 min ago</div>
+                        <div class="request-status status--warning">Pending</div>
+                    </div>
+                    <div class="request-item">
+                        <div class="request-location">OMR → Central Station</div>
+                        <div class="request-time">5 min ago</div>
+                        <div class="request-status status--info">Assigned</div>
+                    </div>
+                    <div class="request-item">
+                        <div class="request-location">Anna Nagar → Marina</div>
+                        <div class="request-time">8 min ago</div>
+                        <div class="request-status status--success">En Route</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Bottom Section: Data Tables -->
+    <section class="bottom-section">
+        <div class="data-tables">
+            <div class="table-container">
+                <h3><i class="fas fa-car"></i> Vehicle Status</h3>
+                <div class="table-wrapper">
+                    <table class="data-table" id="vehicleTable">
+                        <thead>
+                            <tr>
+                                <th>Vehicle ID</th>
+                                <th>Status</th>
+                                <th>Location</th>
+                                <th>Fuel Level</th>
+                                <th>ETA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <h3><i class="fas fa-brain"></i> Optimization Log</h3>
+                <div class="table-wrapper">
+                    <table class="data-table" id="optimizationTable">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Action</th>
+                                <th>Reason</th>
+                                <th>Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vehicle Details Modal -->
+    <div class="modal hidden" id="vehicleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Vehicle Details</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Vehicle details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
