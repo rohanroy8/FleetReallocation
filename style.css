@@ -48,9 +48,9 @@
   --color-surface: var(--color-cream-100);
   --color-text: var(--color-slate-900);
   --color-text-secondary: var(--color-slate-500);
-  --color-primary: var(--color-teal-500);
-  --color-primary-hover: var(--color-teal-600);
-  --color-primary-active: var(--color-teal-700);
+  --color-primary: #ec4899;
+  --color-primary-hover: #db2777;
+  --color-primary-active: #be185d;
   --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
   --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
   --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
@@ -59,10 +59,10 @@
   --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
   --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
   --color-error: var(--color-red-500);
-  --color-success: var(--color-teal-500);
+  --color-success: rgba(236,72,153,0.4);
   --color-warning: var(--color-orange-500);
   --color-info: var(--color-slate-500);
-  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-focus-ring: rgba(236,72,153,0.4);
   --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
 
   /* Common style patterns */
@@ -74,10 +74,10 @@
   --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
 
   /* RGB versions for opacity control */
-  --color-success-rgb: 33, 128, 141;
-  --color-error-rgb: 192, 21, 47;
-  --color-warning-rgb: 168, 75, 47;
-  --color-info-rgb: 98, 108, 113;
+--color-success-rgb: 34, 197, 94;   /* Green (for Positive/Available) */
+--color-error-rgb: 239, 68, 68;     /* Red (for Negative/Occupied) */
+--color-warning-rgb: 245, 158, 11;  /* Orange (for Idle/Paused) */
+--color-info-rgb: 100, 116, 139;    /* Slate Gray (for Neutral/Enroute) */
 
   /* Typography */
   --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
@@ -162,24 +162,24 @@
     --color-bg-6: rgba(194, 65, 12, 0.15); /* Dark orange */
     --color-bg-7: rgba(190, 24, 93, 0.15); /* Dark pink */
     --color-bg-8: rgba(8, 145, 178, 0.15); /* Dark cyan */
-    
+
     /* Semantic Color Tokens (Dark Mode) */
     --color-background: var(--color-charcoal-700);
     --color-surface: var(--color-charcoal-800);
     --color-text: var(--color-gray-200);
     --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
-    --color-primary: var(--color-teal-300);
-    --color-primary-hover: var(--color-teal-400);
-    --color-primary-active: var(--color-teal-800);
+    --color-primary: #f472b6;
+    --color-primary-hover: #db2777;
+    --color-primary-active: #f472b6;
     --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
     --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
     --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
     --color-border: rgba(var(--color-gray-400-rgb), 0.3);
     --color-error: var(--color-red-400);
-    --color-success: var(--color-teal-300);
+    --color-success: rgba(244, 114, 182, 0.4);
     --color-warning: var(--color-orange-400);
     --color-info: var(--color-gray-300);
-    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-focus-ring: rgba(244, 114, 182, 0.4);
     --color-btn-primary-text: var(--color-slate-900);
     --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
     --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
@@ -198,10 +198,10 @@
     --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
 
     /* RGB versions for dark mode */
-    --color-success-rgb: var(--color-teal-300-rgb);
-    --color-error-rgb: var(--color-red-400-rgb);
-    --color-warning-rgb: var(--color-orange-400-rgb);
-    --color-info-rgb: var(--color-gray-300-rgb);
+    --color-success-rgb: 34, 197, 94;   /* Green */
+    --color-error-rgb: 248, 113, 113;   /* Lighter Red */
+    --color-warning-rgb: 251, 191, 36;  /* Lighter Orange */
+    --color-info-rgb: 148, 163, 184;    /* Lighter Gray */
   }
 }
 
@@ -222,24 +222,24 @@
   --color-bg-6: rgba(194, 65, 12, 0.15); /* Dark orange */
   --color-bg-7: rgba(190, 24, 93, 0.15); /* Dark pink */
   --color-bg-8: rgba(8, 145, 178, 0.15); /* Dark cyan */
-  
+
   /* Semantic Color Tokens (Dark Mode) */
   --color-background: var(--color-charcoal-700);
   --color-surface: var(--color-charcoal-800);
   --color-text: var(--color-gray-200);
   --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
-  --color-primary: var(--color-teal-300);
-  --color-primary-hover: var(--color-teal-400);
-  --color-primary-active: var(--color-teal-800);
+  --color-primary: #f472b6;
+  --color-primary-hover: #db2777;
+  --color-primary-active: #f472b6;
   --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
   --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
   --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
   --color-border: rgba(var(--color-gray-400-rgb), 0.3);
   --color-error: var(--color-red-400);
-  --color-success: var(--color-teal-300);
+  --color-success: #4ade80;
   --color-warning: var(--color-orange-400);
   --color-info: var(--color-gray-300);
-  --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+  --color-focus-ring: rgba(236, 72, 153, 0.4);
   --color-btn-primary-text: var(--color-slate-900);
   --color-card-border: rgba(var(--color-gray-400-rgb), 0.15);
   --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
@@ -257,7 +257,7 @@
   --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
 
   /* RGB versions for dark mode */
-  --color-success-rgb: var(--color-teal-300-rgb);
+  --color-success-rgb: #f472b6;
   --color-error-rgb: var(--color-red-400-rgb);
   --color-warning-rgb: var(--color-orange-400-rgb);
   --color-info-rgb: var(--color-gray-300-rgb);
@@ -268,15 +268,15 @@
   --color-brown-600-rgb: 94, 82, 64;
   --color-teal-500-rgb: 33, 128, 141;
   --color-slate-900-rgb: 19, 52, 59;
-  
+
   /* Semantic Color Tokens (Light Mode) */
   --color-background: var(--color-cream-50);
   --color-surface: var(--color-cream-100);
   --color-text: var(--color-slate-900);
   --color-text-secondary: var(--color-slate-500);
-  --color-primary: var(--color-teal-500);
-  --color-primary-hover: var(--color-teal-600);
-  --color-primary-active: var(--color-teal-700);
+  --color-primary: #ec4899;
+  --color-primary-hover: #db2777;
+  --color-primary-active: #ec4899;
   --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
   --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
   --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
@@ -285,13 +285,13 @@
   --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
   --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
   --color-error: var(--color-red-500);
-  --color-success: var(--color-teal-500);
+  --color-success:  rgba(236, 72, 153, 0.4);
   --color-warning: var(--color-orange-500);
   --color-info: var(--color-slate-500);
-  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-focus-ring: rgba(236, 72, 153, 0.4);
 
   /* RGB versions for light mode */
-  --color-success-rgb: var(--color-teal-500-rgb);
+  --color-success-rgb:  rgba(236, 72, 153, 0.4);
   --color-error-rgb: var(--color-red-500-rgb);
   --color-warning-rgb: var(--color-orange-500-rgb);
   --color-info-rgb: var(--color-slate-500-rgb);
@@ -568,43 +568,27 @@ select.form-control {
 }
 
 .status--success {
-  background-color: rgba(
-    var(--color-success-rgb, 33, 128, 141),
-    var(--status-bg-opacity)
-  );
-  color: var(--color-success);
-  border: 1px solid
-    rgba(var(--color-success-rgb, 33, 128, 141), var(--status-border-opacity));
+  background-color: rgba(var(--color-success-rgb), var(--status-bg-opacity));
+  color: #ffffff; /* FORCE WHITE TEXT */
+  border: 1px solid rgba(var(--color-success-rgb), var(--status-border-opacity));
 }
 
 .status--error {
-  background-color: rgba(
-    var(--color-error-rgb, 192, 21, 47),
-    var(--status-bg-opacity)
-  );
-  color: var(--color-error);
-  border: 1px solid
-    rgba(var(--color-error-rgb, 192, 21, 47), var(--status-border-opacity));
+  background-color: rgba(var(--color-error-rgb), var(--status-bg-opacity));
+  color: #ffffff; /* FORCE WHITE TEXT */
+  border: 1px solid rgba(var(--color-error-rgb), var(--status-border-opacity));
 }
 
 .status--warning {
-  background-color: rgba(
-    var(--color-warning-rgb, 168, 75, 47),
-    var(--status-bg-opacity)
-  );
-  color: var(--color-warning);
-  border: 1px solid
-    rgba(var(--color-warning-rgb, 168, 75, 47), var(--status-border-opacity));
+  background-color: rgba(var(--color-warning-rgb), var(--status-bg-opacity));
+  color: #ffffff; /* FORCE WHITE TEXT */
+  border: 1px solid rgba(var(--color-warning-rgb), var(--status-border-opacity));
 }
 
 .status--info {
-  background-color: rgba(
-    var(--color-info-rgb, 98, 108, 113),
-    var(--status-bg-opacity)
-  );
-  color: var(--color-info);
-  border: 1px solid
-    rgba(var(--color-info-rgb, 98, 108, 113), var(--status-border-opacity));
+  background-color: rgba(var(--color-info-rgb), var(--status-bg-opacity));
+  color: #ffffff; /* FORCE WHITE TEXT */
+  border: 1px solid rgba(var(--color-info-rgb), var(--status-border-opacity));
 }
 
 /* Container layout */
@@ -1384,7 +1368,7 @@ input[type="range"]::-moz-range-thumb {
   .main-content {
     grid-template-columns: 240px 1fr 240px;
   }
-  
+
   .app-title {
     font-size: var(--font-size-lg);
   }
@@ -1396,26 +1380,26 @@ input[type="range"]::-moz-range-thumb {
     grid-template-rows: auto 1fr auto;
     max-height: none;
   }
-  
+
   .left-panel,
   .right-panel {
     max-height: none;
     overflow-y: visible;
   }
-  
+
   .center-panel {
     order: 1;
     min-height: 400px;
   }
-  
+
   .left-panel {
     order: 2;
   }
-  
+
   .right-panel {
     order: 3;
   }
-  
+
   .data-tables {
     grid-template-columns: 1fr;
   }
@@ -1427,20 +1411,20 @@ input[type="range"]::-moz-range-thumb {
     gap: var(--space-12);
     text-align: center;
   }
-  
+
   .app-title {
     font-size: var(--font-size-md);
   }
-  
+
   .control-buttons {
     flex-direction: column;
   }
-  
+
   .map-legend {
     flex-direction: column;
     gap: var(--space-6);
   }
-  
+
   .main-content {
     padding: var(--space-8);
   }
